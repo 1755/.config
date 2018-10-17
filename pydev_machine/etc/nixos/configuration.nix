@@ -21,7 +21,9 @@
   
   nixpkgs.config.allowUnfree = true;
   hardware.parallels.enable = true;
-
+  virtualisation.docker = {
+    enable = true;
+  };
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -36,6 +38,14 @@
      defaultLocale = "en_US.UTF-8";
   };
 
+  fonts.fontconfig = {
+    enable = true;
+    hinting.enable = false;
+    #dpi = 220;
+    antialias = false;
+    subpixel.lcdfilter = "none";
+  };
+  
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
 
@@ -49,7 +59,9 @@
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
+  programs.zsh = {
+    enable = true;
+  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -79,13 +91,14 @@
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.dpi = 220;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nixos = {
      isNormalUser = true;
      uid = 1000;
-     extraGroups = [ "wheel" ];
+     extraGroups = [ "wheel" "docker" ];
   };
 
   # This value determines the NixOS release with which your system is to be
